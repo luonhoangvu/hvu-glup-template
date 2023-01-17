@@ -1,0 +1,69 @@
+.people{
+    padding:10rem 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.6)), url(../images/people.png) no-repeat center/cover;
+    &-list{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 50% 50%;
+        grid-gap: 7rem 8rem;
+        margin-top: 9rem;
+        padding: 0 4rem;
+    }
+    &-item{
+        display: flex;
+        @include flexbox(flex-strart);
+    }
+    &-avatar{
+        @include size(11.5rem);
+        border-radius: 100%;
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+    &-info{
+        padding-left: 3rem;
+    }
+    &-name{
+        margin: 0;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+    }
+    &-job{
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 300;
+        font-style: italic;
+        padding-bottom: 2rem;
+        margin-bottom: 2.6rem;
+        position: relative;
+        font-family: $thirf-font;
+        &::after{
+            content: "";
+            @include size(6rem, 4px);
+            @include backgroundColor($primary-color);
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            transform: translateY(-50%);
+        }
+    }
+    &-desc{
+        margin: 0;
+        font-size: 1.5rem;
+        line-height: 1.6;
+        color: $text-color;
+    }
+    @include maxWidth(767px){
+        padding: 5rem 0;
+        &-list{
+            display: inline-block;
+            margin-top: 4rem;
+            padding: unset;
+        }
+        &-item{
+            &:not(:last-child){
+                padding-bottom: 3rem;
+            }
+        }
+    }
+}

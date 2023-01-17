@@ -1,0 +1,32 @@
+//- header --> header-top --> header-content --> header-bottom --> reponsive --> menu javascript --> slick slider
+//- 
+
+header.header 
+    .container
+        .header-top 
+            a.header-logo(href="index.html") MoGo
+            i.fa.fa-bars.header-toggle
+            ul.header-menu
+                +menuLink("#", "about")
+                +menuLink("#", "service")
+                +menuLink("#", "work")
+                +menuLink("#", "blog")
+                +menuLink("#", "contact")
+                li.header-menu-item 
+                    a.header-menu-icon(href="#")
+                        i.fa.fa-shopping-cart
+                li.header-menu-item 
+                    a.header-menu-icon(href="#")
+                        i.fa.fa-search
+        //- end header-top
+        .header-content 
+            h2.header-content-caption cretive template 
+            h1.header-content-main welcome to mogo
+            a.header-content-more(href="#") learn more
+        //- end header-content
+        .header-bottom
+            +headerBottomItem("01", "intro")
+            +headerBottomItem("01", "work")
+            +headerBottomItem("01", "about")
+            +headerBottomItem("01", "contact")
+        //- end header-bottom

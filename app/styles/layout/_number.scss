@@ -1,0 +1,54 @@
+.number{
+    @include backgroundColor($third-color);
+    &-list{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+    }
+    &-item{
+        padding: 8.5rem 3.5rem;
+        color: white;
+        border-left: 1px solid white;
+        text-align: center;
+        text-transform: uppercase;
+        &:last-child{
+        border-right: 1px solid white;
+        }
+        &-count{
+            font-size: 7.2rem;
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 2rem;
+        }
+        &-text{
+            line-height: 1.4;
+        }
+    }
+    @include maxWidth(1023px){
+        &-item{
+            padding: 5rem 1.5rem;
+            &-count{
+                font-size: 5rem;
+                margin-bottom: 1rem;
+            }
+            &-text{
+                line-height: 1.4;
+                font-size: 1.4rem;
+            }
+        }
+    }
+    @include maxWidth(767px){
+        &-list{
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+        }
+        &-item{
+            border-left: unset;
+            border-bottom: 1px solid white;
+            padding: 2.5rem 1.5rem;
+            &:last-child{
+            border-right: unset;
+            border-bottom: unset;
+            }
+        }
+    }
+}

@@ -1,0 +1,64 @@
+.about{
+    padding-top: 9.5rem;
+    padding-bottom: 11rem;
+    background-color: white;
+    &-list{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 3rem;
+    }
+    &-item{
+        position: relative;
+        z-index: 2;
+        transition: all 0.25s linear;
+        &:hover{
+            transform: translate(-1rem, -1rem);
+            &::after{
+                content: "";
+                @include absolutFull();
+                @include backgroundColor($third-color);
+                z-index: -1;
+                transform: translate(1rem, 1rem);
+                transition: all 0.25s linear;
+            }
+            .about-content{
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+    &-content{
+        transition: all 0.25s linear;
+        opacity: 0;
+        visibility: hidden;
+        @include absolutFull();
+        background: linear-gradient(to bottom, rgba($primary-color, 0.7), rgba($secondary-color, 0.8));
+        z-index: 2;
+        @include flexbox(center, center, column);
+        text-align: center;
+        text-transform: uppercase;
+        padding: 2rem;
+        color: white;
+    }
+    &-icon{
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    &-title{
+        font-size: 1.8rem;
+        font-weight: bold;
+        line-height: 1.4;
+        @include textClamp();
+        @include color (
+            (
+                color: red,
+            )
+        )
+    }
+    @include maxWidth(767px) {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+        @include touchSlider(".about-list", 80%, 2.5rem, ".about-item", ".about-image")
+    }
+    
+}

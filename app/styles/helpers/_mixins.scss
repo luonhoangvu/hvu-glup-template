@@ -1,0 +1,208 @@
+// Mixins
+// --------------------------
+
+@mixin fa-icon {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+}
+
+@mixin fa-icon-rotate($degrees, $rotation) {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$rotation})";
+  transform: rotate($degrees);
+}
+
+@mixin fa-icon-flip($horiz, $vert, $rotation) {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$rotation}, mirror=1)";
+  transform: scale($horiz, $vert);
+}
+
+
+// Only display content to screen readers. A la Bootstrap 4.
+//
+// See: http://a11yproject.com/posts/how-to-hide-content/
+
+@mixin sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+// Use in conjunction with .sr-only to only display content when it's focused.
+//
+// Useful for "Skip to main content" links; see http://www.w3.org/TR/2013/NOTE-WCAG20-TECHS-20130905/G1
+//
+// Credit: HTML5 Boilerplate
+
+@mixin sr-only-focusable {
+  &:active,
+  &:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}
+@mixin size($width, $height: $width){
+  width: $width;
+  height: $height;
+}
+//absoluteCenter
+@mixin absoluteCenter($derection: "left", $position: absolute){
+  position: $position;
+  @if $derection == "left"{
+    left: 50%;
+    transform: translateX(-50%);
+  };
+  @if $derection == "top"{
+    top: 50%;
+    transform: translateY(-50%);
+  };
+  @if $derection == "both"{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  };
+}
+@mixin backgroundColor($color: red){
+  background-color: $color;
+}
+@mixin absolutFull(){
+  position: absolute;
+  top: 0;
+  left: 0;
+  @include size(100%);
+}
+// mixin maxWidth(breakpoint){content}
+@mixin maxWidth($breakpoint) {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin minWidth($breakpoint) {
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+@mixin hideScroll(){
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar{
+  display: none;
+  }
+}
+// tránh trường hợp người dùng nhập quá nhiều gây vỡ layout 
+@mixin textClamp($rows: 1, $size: 100%){
+  display: -webkit-box;
+  -webkit-line-clamp: $rows;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: $size;
+  max-width: $size;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+@mixin flexbox($aligh-item: stretch, $justify-content: flex-start, $direction: row, $flex: flex, $wrap: nowrap){
+  display: flex;
+  align-items: $aligh-item;
+  justify-content: $justify-content;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+}
+@mixin hoverEffect($itemClass, $contentClass: "NaN", $transform: "true"){
+  #{$itemClass}{
+    position: relative;
+    z-index: 2;
+    transition: all 0.25s linear;
+    #{$contentClass}{
+      transition: all 0.25s linear;
+      opacity: 0;
+      visibility: hidden;
+      @include absolutFull(); 
+      
+      background: linear-gradient(to bottom, rgba($primary-color, 0.7), rgba($secondary-color, 0.8));
+      z-index: 2;
+      @include flexbox(center, center, column);
+    }
+    &:hover{
+      @if $transform == "true"{
+        transform: translate(-1rem, -1rem);
+        &::after{
+          content: "";
+          @include absolutFull();
+          @include backgroundColor($third-color);
+          z-index: -1;
+          transform: translate(1rem, 1rem);
+          transition: all 0.25s linear;
+        }
+      }
+      #{$contentClass}{
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+@mixin touchSlider($listClass, $width, $gap, $itemClass, $imageClass){
+  #{$listClass}{
+    grid-template-columns: unset;
+    grid-auto-columns: $width;
+    grid-auto-flow: column;
+    grid-column-gap: $gap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+    @include hideScroll();
+  }
+  #{$itemClass}{
+    scroll-snap-align: start;
+  }
+  #{$imageClass}{
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+@mixin color($conf: ()) {
+  // Extending the default arguments with the given object
+  $conf:extend(
+    (color: red),
+    $conf
+  );
+
+  // Dumping CSS
+  color: map-get($conf, color)
+}
+@mixin flexbox2($conf: ()) {
+  // Extending the default arguments with the given object
+  $conf:extend(
+    (
+    display: flex,
+    align-items: stretch,
+    justify-content: flex-start,
+    flex-direction: row,
+    flex-wrap: no-wrap,
+    ),
+    $conf
+  );
+
+  // Dumping CSS
+  display: map-get($conf, display);
+  align-items: map-get($conf, align-items);
+  justify-content: map-get($conf, justify-content);
+  flex-direction: map-get($conf, flex-direction);
+  flex-wrap: map-get($conf, flex-wrap);
+}

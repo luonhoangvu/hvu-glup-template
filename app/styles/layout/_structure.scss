@@ -1,0 +1,60 @@
+.wrapper{
+    max-width: $wrapper;
+    margin: 0px auto;
+}
+.container{
+    max-width: $container + 30px;
+    margin: 0px auto;
+    padding: 0px 15px;
+}
+.block-box{
+    text-align: center;
+    max-width: 96rem;
+    margin-left: auto;
+    margin-right: auto;
+    &-caption{
+        font-family: $thirf-font;
+        font-size: 2.4rem;
+        margin: 0;
+        margin-bottom: 2rem;
+    }
+    &-heading{
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 0;
+        padding-bottom: 3.5rem;
+        margin-bottom: 3.5rem;
+        position: relative;
+        &::before{
+            content: "";
+            @include size(6.5rem, 4px);
+            @include backgroundColor($primary-color);
+            @include absoluteCenter(left);
+            bottom: 0;
+        }
+    }
+    &-desc{
+        margin: 0;
+        font-size: 1.5rem;
+        font-family: $secondary-font;
+        color: $text-color;
+        line-height: 1.4;
+        font-weight: 300;
+        margin-bottom: 10rem;
+    }
+    @include maxWidth(767px) {
+        &-caption{
+            font-size: 2rem;
+        }
+        &-heading{
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+        }
+        &-desc{
+            font-size: 1.4rem;
+            margin-bottom: 4rem;
+        }
+    }
+}

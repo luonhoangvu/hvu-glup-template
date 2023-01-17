@@ -1,0 +1,106 @@
+.story{
+    padding: 10rem 0;
+    background-color: white;
+    &-list{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 2rem;
+    }
+    &-media{
+        position: relative;
+    }
+    &-image{
+        @include size(100%, 24rem);
+        object-fit: cover;
+    }
+    &-date{
+        @include backgroundColor($third-color);
+        padding: 1.5rem 2rem;
+        @include flexbox(center, center, column);
+        color: white;
+        position: absolute;
+        bottom: 1rem;
+        left: -1rem;
+        &-number{
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        &-text{
+            font-size: 1.5rem;
+            font-weight: 300;
+            font-style: italic;
+        }
+    }
+    &-title{
+        margin: 0;
+        margin-top: 2rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+    }
+    &-desc{
+        margin: 0;
+        font-size: 1.5rem;
+        line-height: 1.4;
+        color: $text-color;
+        font-weight: 300;
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+        border-bottom: 1.5px solid $gray-color;
+    }
+    &-meta{
+        @include flexbox(center);
+        &-item{
+            margin-right: 2rem;
+        }
+        &-icon{
+            color: $third-color;
+            margin-right: 1.5rem;
+        }
+        &-number{
+            font-weight: 100;
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+    }
+    @include maxWidth(1023px){
+        padding: 5rem 0;
+        &-list{
+            padding-left: 0;
+        }
+        &-image{
+            height: 24rem;
+        }
+    }
+    @include maxWidth(767px){
+        &-list{
+            display: block;
+        }
+        &-item:not(:last-child){
+            margin-bottom: 2rem;
+        }
+    }
+}
+.map{
+    padding: 6rem 0;
+    background: linear-gradient(to bottom, rgba(white, 0.7), rgba(White, 0.6)), url("../images/map.png") no-repeat center / cover;
+    &-content{
+        @include flexbox(center, center, column);
+    }
+    &-heading{
+        position: relative;
+        padding-bottom: 2rem;
+        text-transform: uppercase;
+        font-size: 2.4rem;
+        color: $primary-color;
+        font-weight: bold;
+        margin-top: 1.5rem;
+        &::before{
+            content: "";
+            @include size(6.5rem, 4px);
+            @include backgroundColor($primary-color);
+            @include absoluteCenter(left);
+            bottom: 0;
+        }
+    }
+}
